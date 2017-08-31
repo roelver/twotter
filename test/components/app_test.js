@@ -11,4 +11,8 @@ describe('App' , () => {
   it('renders something', () => {
     expect(component).to.exist;
   });
+
+  it('shows a text', () => {
+    expect(component).to.contain('React advanced starter');
+  });
 });
