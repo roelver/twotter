@@ -6,6 +6,7 @@
   "repository": "git@github.com:roelver/ReduxSimpleStarter.git",
   "scripts": {
     "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "lint": "eslint src",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch",
     "postinstall": "webpack -p",
@@ -27,7 +28,6 @@
     "jquery": "^3.2.1",
     "jsdom": "^11.1.0",
     "mocha": "^3.4.2",
-    "react-addons-test-utils": "^15.6.0",
     "webpack": "^3.4.1",
     "webpack-dev-server": "^2.6.1"
   },

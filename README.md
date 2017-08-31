@@ -17,7 +17,7 @@ Checkout this repo, install dependencies, then start the gulp process with the f
 > git clone https://github.com/roelver/ReduxSimpleStarter.git
 > cd ReduxSimpleStarter
 > npm install
-> npm start
+> npm run dev
 ```
 
 #### Not Familiar with Git?
@@ -25,5 +25,5 @@ Click [here](https://github.com/roelver/ReduxSimpleStarter/releases) then downlo
 
 ```
 > npm install
-> npm start
+> npm run dev
 ```
