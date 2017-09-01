@@ -1,0 +1,103 @@
+header {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.parent {
+    width: 100%;
+    background-color: #ddd;
+    padding-left: 20px;
+    margin-left: 0;
+}
+.body-wrapper {
+    background-color: #fff;
+    font-size: 1.4em;
+}
+.app-body, app-left-bar, app-right-bar {
+    display: flex;
+    padding-left: 0;
+    padding-right: 0;
+}
+.entry {
+    padding: 20px;
+    display: block;
+    background-color: #eee;
+}
+
+input#twot {
+    padding: 6px;
+}
+.entry .input-group {
+    width: 80%;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.entry .form-control {
+    border-style: dotted;
+    border-color: #090;
+}
+.icon, .settings {
+    background-color: #dde2dd;
+    height: 100%;
+}
+.icon {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    padding: 3px 0;
+}
+.settings {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.content {
+    background-color: #eee;
+    height: 100%;
+}
+.bag {
+    border-color: #090;
+    border-width: 1px;
+    border-radius: 8px;
+    border-style: dotted;
+    height: 80px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 0.7em;
+    color: #555;
+}
+.origin, .message {
+    width: 100%;
+}
+.icon img {
+    height:100%;
+}
+.author, .date {
+    font-size: 0.8em;
+    color: #aaa;
+    display: inline-table;
+    margin-left:0;
+    margin-right: 0;
+}
+.rb {
+    border: 1px solid red;
+}
+.message {
+    height: 55px;
+    font-size: 0.9em;
+    overflow: hidden;
+    padding: 0;
+}
+.origin {
+    height: 18px;
+    padding-top: 2px;
+}
+.date {
+    text-align: right;
+    float: right;
+}
+.author {
+    float: left;
+}

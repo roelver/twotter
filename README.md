@@ -1,29 +1,24 @@
-# ReduxSimpleStarter
+# Twotter - a sample React app like Twitter
 
-Interested in learning [Redux](https://www.udemy.com/react-redux/)? (**recommended!!!**)
+## Features
+* React
+* Redux
+* React Router 4
+* Redux Form
+* Unit tests with Mocha
+* ESlint config AirBnB 
 
-### Forked from StephenGrider's Starter Kit
-
-This Starter Kit is basically [Stephen Grider's Starter Kit](https://github.com/StephenGrider/ReduxSimpleStarter) with updated framework versions and ESLint configured, without Google Maps included.
-
-### Getting Started
-
-There are two methods for getting started with this repo.
-
-#### Familiar with Git?
-Checkout this repo, install dependencies, then start the gulp process with the following:
-
-```
-> git clone https://github.com/roelver/ReduxSimpleStarter.git
-> cd ReduxSimpleStarter
-> npm install
-> npm run dev
-```
-
-#### Not Familiar with Git?
-Click [here](https://github.com/roelver/ReduxSimpleStarter/releases) then download the .zip file.  Extract the contents of the zip file, then open your terminal, change to the project directory, and:
+#### Getting Started?
+Click [here](https://github.com/roelver/Twotter/releases) then download the .zip file.  Extract the contents of the zip file, then open your terminal, change to the project directory, and:
 
 ```
 > npm install
 > npm run dev
 ```
+Now open the browser at [http://localhost:8081]() to open the application.
+
+Then open another shell in the project directory and start the unit test watcher 
+```
+> npm run test:watch
+```
+

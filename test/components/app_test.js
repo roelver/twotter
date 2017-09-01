@@ -13,6 +13,15 @@ describe('App' , () => {
   });
 
   it('shows a text', () => {
-    expect(component).to.contain('React advanced starter');
+    expect(component).to.contain('Twotter - like Twitter');
   });
+
+  it('contains a header', () => {
+    expect(component.find('header')).to.exist;
+  });
+
+  it('contains a body', () => {
+    expect(component.find('.app-body')).to.exist;
+  });
+
 });
