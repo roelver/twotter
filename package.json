@@ -1,9 +1,9 @@
 {
-  "name": "redux-simple-starter",
-  "version": "1.0.0",
-  "description": "Simple starter package for Redux with React and Babel support. This is a fork from StephenGrider's starter with upgraded framework versions and eslint set up.",
+  "name": "twotter",
+  "version": "0.0.1",
+  "description": "Simple Twitter like app with React/Redux, AirBnB ESLint and Mocha/Chai unit tests. ",
   "main": "index.js",
-  "repository": "git@github.com:roelver/ReduxSimpleStarter.git",
+  "repository": "git@github.com:roelver/twotter.git",
   "scripts": {
     "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "lint": "eslint src",
@@ -38,7 +38,7 @@
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-redux": "5.0.5",
+    "react-redux": "^5.0.6",
     "react-router": "^4.1.2",
     "react-router-dom": "^4.1.2",
     "redux": "^3.0.4"
