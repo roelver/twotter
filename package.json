@@ -10,7 +10,9 @@
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch",
     "postinstall": "webpack -p",
-    "start": "node server.js"
+    "start": "node server.js",
+    "startserver": "node server/index.js",
+    "devserver": "nodemon server/index.js"
   },
   "author": "Roel Verbunt",
   "license": "ISC",
@@ -41,6 +43,15 @@
     "react-redux": "^5.0.6",
     "react-router": "^4.1.2",
     "react-router-dom": "^4.1.2",
-    "redux": "^3.0.4"
+    "redux": "^3.0.4",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "jwt-simple": "^0.5.1",
+    "mongoose": "^4.11.6",
+    "morgan": "^1.8.2",
+    "passport": "^0.4.0",
+    "passport-jwt": "^2.2.1",
+    "passport-local": "^1.0.0"
   }
 }
