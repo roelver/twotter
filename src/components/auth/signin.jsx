@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
-import { signIn, loadCurrentUser} from '../../actions/index';
+import { signIn } from '../../actions/index';
 
 class Signin extends Component {
 
@@ -88,6 +88,6 @@ export default reduxForm({
   validate,
   form: 'LoginForm'
 })(
-  connect(mapStateToProps, { signIn, loadCurrentUser })(Signin)
+  connect(mapStateToProps, { signIn })(Signin)
 );
 

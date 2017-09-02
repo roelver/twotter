@@ -4,7 +4,6 @@ import { withRouter } from 'react-router';
 import { Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { signOut } from '../actions';
 import { SIGNIN_URL } from '../constants';
 
 const propTypes = {
@@ -14,8 +13,7 @@ const propTypes = {
 
 const defaultProps = {
   user: {},
-  loggedIn: false,
-  signOut: () => { return null; },
+  loggedIn: false
 };
 
 
@@ -42,27 +40,41 @@ class Header extends Component {
   renderLinksRight() {
     if (this.props.loggedIn) {
       return (
-        <li className="nav-item" key="signout">
-          <NavLink
-            to="/signout"
-            activeClassName="active"
-            className="nav-link"
-          >
+        <ul className="nav navbar-nav navbar-nav-right">
+          <li className="nav-item" key="signout">
+            <NavLink
+              to="/signout"
+              activeClassName="active"
+              className="nav-link"
+            >
             Sign Out
-          </NavLink>
-        </li>
+            </NavLink>
+          </li>
+        </ul>
       );
     }
     return (
-      <li className="nav-item" key="signin">
-        <NavLink
-          to={SIGNIN_URL}
-          activeClassName="active"
-          className="nav-link"
-        >
-          Signin
-        </NavLink>
-      </li>
+      <ul className="nav navbar-nav navbar-nav-right">
+        <li className="nav-item" key="signup">
+          <NavLink
+            to="/signup"
+            activeClassName="active"
+            className="nav-link"
+          >
+            Sign Up
+          </NavLink>
+
+        </li>
+        <li className="nav-item" key="signin">
+          <NavLink
+            to={SIGNIN_URL}
+            activeClassName="active"
+            className="nav-link"
+          >
+            Signin
+          </NavLink>
+        </li>
+      </ul>
     );
   }
 
@@ -75,9 +87,7 @@ class Header extends Component {
           </div>
           <div id="navbar">
             { this.renderLinksLeft() }
-            <ul className="nav navbar-nav navbar-nav-right">
-              { this.renderLinksRight() }
-            </ul>
+            { this.renderLinksRight() }
           </div>
         </div>
       </nav>
@@ -97,4 +107,4 @@ const mapStateToProps = (state) => {
 
 // Import router info (current path) with withRouter
 export default withRouter(
-  connect(mapStateToProps, { signOut })(Header));
+  connect(mapStateToProps)(Header));

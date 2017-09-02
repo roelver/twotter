@@ -22,7 +22,6 @@ const store = createStoreWithMiddleware(reducers);
 // Make sure to login if the user refreshes the page while signed in
 const token = localStorage.getItem(LS_TOKEN_KEY);
 if (token) {
-  console.log('Token', token);
   store.dispatch(loadCurrentUser(token));
 }
 
