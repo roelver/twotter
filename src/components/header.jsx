@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 
 import { signOut } from '../actions';
 import { SIGNIN_URL } from '../constants';
-import { requiredRole as resourcesRole } from './resources';
 
 const propTypes = {
   user: PropTypes.object,
@@ -16,27 +15,24 @@ const propTypes = {
 const defaultProps = {
   user: {},
   loggedIn: false,
-  signOut: () => { return null;},
+  signOut: () => { return null; },
 };
 
 
 class Header extends Component {
   renderLinksLeft() {
     if (this.props.loggedIn && this.props.user) {
-      const { roles } = this.props.user;
-      const resourcesAllowed = roles.indexOf(resourcesRole) >= 0;
       return (
         <ul className="nav navbar-nav">
-          { resourcesAllowed ?
-            <li className="nav-item" key="resources">
-              <NavLink
-                to="/resources"
-                activeClassName="active"
-                className="nav-link"
-              >
-                Resources
-              </NavLink>
-            </li> : '' }
+          <li className="nav-item" key="timeline">
+            <NavLink
+              to="/timeline"
+              activeClassName="active"
+              className="nav-link"
+            >
+                Timeline
+            </NavLink>
+          </li>
         </ul>
       );
     }

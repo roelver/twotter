@@ -20,7 +20,8 @@ export function loginError(err) {
 }
 
 function processToken(resp, dispatch, event) {
-  const token = resp.headers.get('token');
+  const token = resp.headers.get('Token');
+  console.log('Process token', token);
   if (token && token.length > 0) {
     localStorage.setItem(LS_TOKEN_KEY, token);
     dispatch({
@@ -52,7 +53,7 @@ export function loadCurrentUser(token) {
         })
       };
 
-      fetch(`${ROOT_URL}/profile`, options)
+      fetch(`${ROOT_URL}/me`, options)
         .then(resp => resp.json()
           .then(user => {
             return dispatch({
@@ -73,7 +74,7 @@ export function loadCurrentUser(token) {
 }
 
 
-export function signIn({ userid, password }) {
+export function signIn({ email, password }) {
   return function (dispatch) {
     localStorage.removeItem(LS_TOKEN_KEY);
     const history = createBrowserHistory();
@@ -82,7 +83,7 @@ export function signIn({ userid, password }) {
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
-      body: JSON.stringify({ username: userid, password })
+      body: JSON.stringify({ email, password })
     };
 
     fetch(`${ROOT_URL}/signin`, options)
@@ -90,18 +91,9 @@ export function signIn({ userid, password }) {
         if (resp.status > 399) {
           throw new Error('Invalid credentials');
         }
+
         processToken(resp, dispatch, 'Login');
-        resp.json()
-          .then(user => {
-            return dispatch({
-              type: STORE_CURRENT_USER,
-              payload: user
-            });
-          })
-          .catch((err) => {
-            dispatch(loginError(`Login failed (${err.message})`));
-          });
-        history.push('/resources');
+        history.push('/timeline');
       })
       .catch((err) => {
         dispatch(loginError(`Login failed (${err.message})`));
@@ -126,7 +118,7 @@ export function signupUser({ email, password, username, fullname, avatarUrl }) {
           throw new Error('Signup failed');
         }
         processToken(resp, dispatch, 'Signup');
-        history.push('/resources');
+        history.push('/timeline');
       })
       .catch(response => dispatch(loginError(response.data.error)));
   };

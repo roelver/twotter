@@ -38,6 +38,7 @@
     "babel-preset-stage-1": "^6.1.18",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
     "express": "^4.15.4",
     "history": "^4.7.2",
     "jwt-simple": "^0.5.1",

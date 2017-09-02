@@ -8,7 +8,7 @@ class Signin extends Component {
 
   componentWillUpdate(props) {
     if (props.profile && props.profile.loggedIn) {
-      this.props.history.push('/resources');
+      this.props.history.push('/timeline');
     }
   }
 

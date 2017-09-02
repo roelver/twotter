@@ -13,7 +13,6 @@ import requireAuth from './components/auth/require_auth';
 import Signin from './components/auth/signin';
 import Signup from './components/auth/signup';
 import Signout from './components/auth/signout';
-import Resources from './components/resources';
 import { LS_TOKEN_KEY } from './constants';
 import { loadCurrentUser } from './actions';
 
@@ -23,6 +22,7 @@ const store = createStoreWithMiddleware(reducers);
 // Make sure to login if the user refreshes the page while signed in
 const token = localStorage.getItem(LS_TOKEN_KEY);
 if (token) {
+  console.log('Token', token);
   store.dispatch(loadCurrentUser(token));
 }
 
@@ -36,13 +36,13 @@ ReactDOM.render(
             exact
             path="/"
             render={() =>
-              <Redirect to="/resources" />
+              <Redirect to="/timeline" />
             }
           />
           <Route path="/signup" component={Signup} />
           <Route path="/signin" component={Signin} />
           <Route path="/signout" component={Signout} />
-          <Route path="/resources" component={requireAuth(Resources)} />
+          <Route path="/timeline" component={requireAuth(App)} />
         </Switch>
       </div>
     </BrowserRouter>

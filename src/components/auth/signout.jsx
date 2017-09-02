@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../../actions';
+import { LS_TOKEN_KEY } from '../../constants';
 
 class Signout extends Component {
   componentWillMount() {
-    this.props.signoutUser();
+    localStorage.removeItem(LS_TOKEN_KEY);
   }
-
   render() {
     return <div>Sorry to see you go...</div>;
   }
 }
 
-export default connect(null, actions)(Signout);
+export default Signout;
