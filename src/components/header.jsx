@@ -40,7 +40,7 @@ class Header extends Component {
   renderLinksRight() {
     if (this.props.loggedIn) {
       return (
-        <ul className="nav navbar-nav navbar-nav-right">
+        <ul className="nav navbar-nav navbar-nav-right pull-right">
           <li className="nav-item" key="signout">
             <NavLink
               to="/signout"
@@ -54,7 +54,7 @@ class Header extends Component {
       );
     }
     return (
-      <ul className="nav navbar-nav navbar-nav-right">
+      <ul className="nav navbar-nav navbar-nav-right pull-right">
         <li className="nav-item" key="signup">
           <NavLink
             to="/signup"
