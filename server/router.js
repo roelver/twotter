@@ -21,5 +21,6 @@ module.exports = (app) => {
   app.get('/twot/:start', requireAuth, TwotController.getLastTwots);
   app.get('/twot', requireAuth, TwotController.getLastTwots);
   app.post('/twot', requireAuth, TwotController.addTwot);
+  app.delete('/twot/:index', requireAuth, TwotController.deleteTwot);
 
 };

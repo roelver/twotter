@@ -12,23 +12,14 @@ exports.addTwot = function (req, res, next) {
       if (existingTwots) {
         existingTwots.twots.unshift({ text: data.text, posted: data.posted });
         existingTwots.save()
-          .then((err) => {
-            if (err) {
-              next(err);
-            }
-            return res.json({ status: 'OK1' });
-          });
+          .then(() => res.json({ status: 'OK' }))
+          .catch(err2 => next(err2));
       } else {
         const twot = new Twot({ user, twots: [data] });
         twot.save()
-          .then((err1) => {
-            if (err1) {
-              next(err);
-            }
-            return res.json({ status: 'OK2' });
-          });
+          .then(() => res.json({ status: 'OK' }))
+          .catch(err2 => next(err2));
       }
-      return;
     });
   }
 };
@@ -38,26 +29,42 @@ exports.getLastTwots = function (req, res, next) {
   const start = req.params.start || 0;
   const end = start + 10;
   if (user && user['_id']) {
-    console.log(user);
     Twot.findOne({ user: user['_id'] }, (err, existingTwots) => {
       if (err) {
         return next(err);
       }
-      if (existingTwots) {
+      if (existingTwots && existingTwots.twots.length >= start) {
         const data = {
           id: existingTwots._id,
           userid: existingTwots.user,
           twots: existingTwots.twots.filter((twot, index) => (index >= start && index < end))
         };
-        console.log('twots',data);
-        return res.json(data);
+        res.json(data);
       } else {
-        return res.status(404).send({ message: 'No twots1' });
+        res.status(404).send({ message: 'No more twots' });
       }
-      return '';
     });
-    return;
   }
-  res.status(404).send({ message: 'No twots2' });
+};
+
+exports.deleteTwot = function (req, res, next) {
+  const user = req.user;
+  const index = req.params.index;
+  if (user && user['_id']) {
+    Twot.findOne({ user: user['_id'] }, (err, existingTwots) => {
+      if (err) {
+        return next(err);
+      }
+      if (existingTwots && existingTwots.twots.length >= index) {
+
+        existingTwots.twots.splice(index, 1);
+        existingTwots.save()
+          .then(() => res.json({ message: 'OK' }))
+          .catch(err2 => next(err2));
+      } else {
+        res.status(404).send({ message: 'No twots' });
+      }
+    });
+  }
 };
 
