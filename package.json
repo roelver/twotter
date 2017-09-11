@@ -1,7 +1,7 @@
 {
   "name": "twotter",
   "version": "0.0.1",
-  "description": "Simple Twitter like app with React/Redux, AirBnB ESLint and Mocha/Chai unit tests. ",
+  "description": "Simple Twitter like app with React/Redux, AirBnB ESLint, Passport Local and Mocha/Chai unit tests. ",
   "main": "index.js",
   "repository": "git@github.com:roelver/twotter.git",
   "scripts": {
