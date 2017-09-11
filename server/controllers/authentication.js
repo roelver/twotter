@@ -44,7 +44,6 @@ exports.signin = (req, res) => {
 };
 
 exports.me = (req, res) => {
-  console.log(req);
   const { _id, email, username, fullname, avatarUrl } = req.user;
   res.json({ id: _id, email, username, fullname, avatarUrl });
 };

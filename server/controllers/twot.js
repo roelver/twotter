@@ -4,22 +4,34 @@ exports.addTwot = function (req, res, next) {
   const user = req.user;
   const data = req.body;
   if (user && user['_id']) {
-
     Twot.findOne({ user }, (err, existingTwots) => {
       if (err) {
         return next(err);
       }
+      let twot = {};
       if (existingTwots) {
-        existingTwots.twots.unshift({ text: data.text, posted: data.posted });
-        existingTwots.save()
-          .then(() => res.json({ status: 'OK' }))
-          .catch(err2 => next(err2));
+        existingTwots.twots.unshift({ text: data.text, posted: new Date() });
+        twot = existingTwots;
       } else {
-        const twot = new Twot({ user, twots: [data] });
-        twot.save()
-          .then(() => res.json({ status: 'OK' }))
-          .catch(err2 => next(err2));
+        twot = new Twot({ user, twots: [data] });
       }
+      twot.save()
+        .then((t) => {
+          const reply = {
+            id: t['_id'],
+            userid: user['_id'],
+            fullname: user.fullname,
+            avatarUrl: user.avatarUrl,
+            twots: [
+              { _id: t.twots[0]['_id'],
+                text: t.twots[0].text,
+                posted: t.twots[0].posted
+              }
+            ]
+          };
+          return res.json(reply);
+        })
+        .catch(err2 => next(err2));
     });
   }
 };
@@ -37,6 +49,8 @@ exports.getLastTwots = function (req, res, next) {
         const data = {
           id: existingTwots._id,
           userid: existingTwots.user,
+          fullname: user.fullname,
+          avatarUrl: user.avatarUrl,
           twots: existingTwots.twots.filter((twot, index) => (index >= start && index < end))
         };
         res.json(data);

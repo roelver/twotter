@@ -1,4 +1,5 @@
 import { createBrowserHistory } from 'history';
+import { loadTwots } from './twot-actions';
 
 import { STORE_CURRENT_USER,
   STORE_TOKEN,
@@ -21,7 +22,6 @@ export function loginError(err) {
 
 function processToken(resp, dispatch, event) {
   const token = resp.headers.get('Token');
-  console.log('Process token', token);
   if (token && token.length > 0) {
     localStorage.setItem(LS_TOKEN_KEY, token);
     dispatch({
@@ -56,6 +56,7 @@ export function loadCurrentUser(token) {
       fetch(`${ROOT_URL}/me`, options)
         .then(resp => resp.json()
           .then(user => {
+            loadTwots();
             return dispatch({
               type: STORE_CURRENT_USER,
               payload: user

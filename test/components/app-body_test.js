@@ -1,11 +1,16 @@
-import { renderComponent , expect } from '../test_helper';
+import sinon from 'sinon';
+import axios from 'axios';
+import { renderComponent, expect } from '../test_helper';
 import AppBody from '../../src/components/app-body';
+
+import state from '../data/dummy_state';
+import { dummy1, dummy2 } from '../data/dummy_twot_response';
 
 describe('AppBody', () => {
   let component;
 
   beforeEach(() => {
-    component = renderComponent(AppBody);
+    component = renderComponent(AppBody, null, state);
   });
 
   it('renders something', () => {
@@ -29,7 +34,6 @@ describe('AppBody', () => {
   });
 
   describe(' Entering some text', () => {
-
     // Executed after the top-level beforeEach
     beforeEach(() => {
       // Enter some text in the textarea
@@ -40,23 +44,33 @@ describe('AppBody', () => {
       expect(component.find('input')).to.have.value('hello world');
     });
 
-    it('when submitted, clear input', () => {
+    it('when submitted, clear input', async () => {
+      const promise = Promise;
+      const stubResponse = { status: 200, statusText: 'OK', data: dummy1 };
+      const stub2 = sinon.stub(axios, 'post')
+        .returns(promise.resolve(stubResponse));
+
       component.find('button').simulate('click');
+      await promise;
+
       expect(component.find('input')).to.have.value('');
+      stub2.restore();
     });
 
-    it('when submitted, new twot is added to the list', () => {
+    it('when submitted, new twot is added to the list', async () => {
+      const promise = Promise;
+      const stubResponse = { status: 200, statusText: 'OK', data: dummy1 };
+      const stub2 = sinon.stub(axios, 'post')
+        .returns(promise.resolve(stubResponse));
+
       component.find('button').simulate('click');
+      await promise;
+
       expect(component.find('.twot')).to.exist;
-    });
+      expect(component.find('.twot').length).to.equal(3); // 2 from state and 1 new
 
-    it('when 2 twots are submitted, the list contains 2 twots', () => {
-      component.find('button').simulate('click');
-      component.find('input').simulate('change', 'hello world again');
-      component.find('button').simulate('click');
-      expect(component.find('.twot').length).to.equal(2);
+      stub2.restore();
     });
 
   });
-
 });

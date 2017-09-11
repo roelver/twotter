@@ -5,7 +5,6 @@ import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
-
 import App from './components/app';
 import reducers from './reducers';
 import Header from './components/header';
@@ -14,7 +13,7 @@ import Signin from './components/auth/signin';
 import Signup from './components/auth/signup';
 import Signout from './components/auth/signout';
 import { LS_TOKEN_KEY } from './constants';
-import { loadCurrentUser } from './actions';
+import { loadCurrentUser, loadTwots } from './actions';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
@@ -23,6 +22,7 @@ const store = createStoreWithMiddleware(reducers);
 const token = localStorage.getItem(LS_TOKEN_KEY);
 if (token) {
   store.dispatch(loadCurrentUser(token));
+  store.dispatch(loadTwots(0));
 }
 
 ReactDOM.render(

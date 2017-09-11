@@ -7,7 +7,7 @@ describe('Twot' , () => {
   beforeEach(() => {
     const props = { twot: {
       id: 1,
-      author: 'Tester',
+      authorName: 'Tester',
       text: 'Hello World!',
       datePosted: 'Today'
     }};

@@ -15,17 +15,16 @@ class AppBody extends Component {
 
   addTwot(text) {
     const newTwot = {
-      id: this.props.allTwots.length + 1,
+      id: 'TBD by server',
       authorName: this.props.user.fullname,
       authorId: this.props.user.email,
-      text,
-      datePosted: (new Date()).toTimeString()
+      text
     };
     this.props.createTwot(newTwot);
   }
 
   renderTwots() {
-    if (this.props.allTwots.length > 0) {
+    if (this.props.allTwots && this.props.allTwots.length > 0) {
       return this.props.allTwots.map((twot) => {
         return <Twot key={twot.id} twot={twot} iconUrl={this.props.user.avatarUrl }/>;
       });

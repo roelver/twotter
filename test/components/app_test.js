@@ -12,14 +12,6 @@ describe('App' , () => {
     expect(component).to.exist;
   });
 
-  it('shows a text', () => {
-    expect(component).to.contain('Twotter - like Twitter');
-  });
-
-  it('contains a header', () => {
-    expect(component.find('header')).to.exist;
-  });
-
   it('contains a body', () => {
     expect(component.find('.app-body')).to.exist;
   });
