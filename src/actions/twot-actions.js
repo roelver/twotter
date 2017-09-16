@@ -2,7 +2,8 @@ import axios from 'axios';
 import {
   CREATE_TWOT,
   POPULATE_TWOTS,
-  LS_TOKEN_KEY
+  LS_TOKEN_KEY,
+  API_ERROR
 } from '../constants';
 
 import config from '../config';
@@ -43,7 +44,13 @@ export function createTwot(newTwot) {
           payload: mapServerDataToTwots(resp.data)[0]
         });
       })
-      .catch(err => console.error('Save error', err));
+      .catch(err => {
+        dispatch({
+          type: API_ERROR,
+          payload: err.message
+        });
+        console.error('Save error', err.message);
+      });
   };
 }
 
@@ -57,7 +64,7 @@ export function loadTwots(start) {
           payload: { allTwots: mapServerDataToTwots(data) }
         });
       })
-      .catch(err => console.error('Load data error', err));
+      .catch(err => console.error('Load data error (ignore on unit test)'));
   };
 }
 

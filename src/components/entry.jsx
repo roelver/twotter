@@ -40,8 +40,4 @@ class Entry extends Component {
   }
 }
 
-Entry.propTypes = {
-  addTwot: PropTypes.func.isRequired
-};
-
 export default Entry;

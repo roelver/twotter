@@ -52,9 +52,9 @@ describe('AppBody', () => {
 
       component.find('button').simulate('click');
       await promise;
+      stub2.restore();
 
       expect(component.find('input')).to.have.value('');
-      stub2.restore();
     });
 
     it('when submitted, new twot is added to the list', async () => {
@@ -66,10 +66,11 @@ describe('AppBody', () => {
       component.find('button').simulate('click');
       await promise;
 
-      expect(component.find('.twot')).to.exist;
+      stub2.restore();
+
+      expect (component.find('.twot')).to.exist;
       expect(component.find('.twot').length).to.equal(3); // 2 from state and 1 new
 
-      stub2.restore();
     });
 
   });

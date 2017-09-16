@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Twot from './twot';
 import Entry from './entry';
-import { createTwot } from '../actions';
+import { createTwot, loadTwots } from '../actions';
 
 import { AppLeftBar, AppRightBar } from './snippets';
 
@@ -11,6 +11,12 @@ class AppBody extends Component {
   constructor(props) {
     super(props);
     this.addTwot = this.addTwot.bind(this);
+  }
+
+  componentWillMount() {
+    if (this.props.allTwots.length === 0) {
+      this.props.loadTwots(0);
+    }
   }
 
   addTwot(text) {
@@ -26,6 +32,7 @@ class AppBody extends Component {
   renderTwots() {
     if (this.props.allTwots && this.props.allTwots.length > 0) {
       return this.props.allTwots.map((twot) => {
+        console.log('Twot created', twot);
         return <Twot key={twot.id} twot={twot} iconUrl={this.props.user.avatarUrl }/>;
       });
     }
@@ -52,8 +59,9 @@ class AppBody extends Component {
 function mapStateToProps(state) {
   return {
     user: state.profile.user,
-    allTwots: state.twot
+    allTwots: state.twot.allTwots,
+    error: state.twot.error
   };
 }
 
-export default connect(mapStateToProps, { createTwot })(AppBody);
+export default connect(mapStateToProps, { createTwot, loadTwots })(AppBody);

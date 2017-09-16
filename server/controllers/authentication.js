@@ -28,8 +28,11 @@ exports.signup = function (req, res, next) {
       if (errx) { return next(errx); }
       res.append('Token', tokenForUser(user));
       res.append('Access-Control-Expose-Headers', 'Token');
-      res.json({ id: user._id, email: user.email, username: user.username,
-        fullname: user.fullname, avatarUrl: user.avatarUrl });
+      res.json({ id: user._id,
+        email: user.email,
+        username: user.username,
+        fullname: user.fullname,
+        avatarUrl: user.avatarUrl });
     });
   });
 };
