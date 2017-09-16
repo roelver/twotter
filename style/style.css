@@ -35,7 +35,14 @@ input#twot {
     margin-left: auto;
     margin-right: auto;
 }
-
+.entry .input-group-btn {
+    vertical-align: top;
+    padding: 0;
+}
+.entry .input-group-btn button {
+    height: 100%;
+    padding: 18px 12px;
+}
 .entry .form-control {
     border-style: dotted;
     border-color: #090;
@@ -100,4 +107,14 @@ input#twot {
 }
 .author {
     float: left;
+}
+.remain {
+    font-size: 0.5em;
+    color: #aaa;
+}
+.remain.red {
+    color: red;
+}
+.entry textarea {
+    height: 58px;
 }

@@ -20,7 +20,7 @@ exports.addTwot = function (req, res, next) {
         twot.newest = now;
       } else {
         let seqno = 0;
-        if (existingTwots > 0) {
+        if (existingTwots) {
           seqno = existingTwots[0].seqno + 1;
         }
         data.posted = new Date();

@@ -32,7 +32,6 @@ class AppBody extends Component {
   renderTwots() {
     if (this.props.allTwots && this.props.allTwots.length > 0) {
       return this.props.allTwots.map((twot) => {
-        console.log('Twot created', twot);
         return <Twot key={twot.id} twot={twot} iconUrl={this.props.user.avatarUrl }/>;
       });
     }

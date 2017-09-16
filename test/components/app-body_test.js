@@ -37,11 +37,11 @@ describe('AppBody', () => {
     // Executed after the top-level beforeEach
     beforeEach(() => {
       // Enter some text in the textarea
-      component.find('input').simulate('change', 'hello world');
+      component.find('textarea').simulate('change', 'hello world');
     });
 
     it('shows text that is entered', () => {
-      expect(component.find('input')).to.have.value('hello world');
+      expect(component.find('textarea')).to.have.value('hello world');
     });
 
     it('when submitted, clear input', async () => {
@@ -54,7 +54,7 @@ describe('AppBody', () => {
       await promise;
       stub2.restore();
 
-      expect(component.find('input')).to.have.value('');
+      expect(component.find('textarea')).to.have.value('');
     });
 
     it('when submitted, new twot is added to the list', async () => {

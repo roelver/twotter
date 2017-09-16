@@ -9,12 +9,11 @@ describe('Entry' , () => {
   });
 
   it('contains an input field', () => {
-    expect(component.find('input[type=text]')).to.exist;
+    expect(component.find('textarea')).to.exist;
   });
 
   it('contains an button', () => {
     expect(component.find('button')).to.exist;
   });
-
 
 });
