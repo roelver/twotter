@@ -62,10 +62,8 @@ exports.getLastTwots = function (req, res, next) {
     };
     Twot.find({ user }).sort('-seqno' ).exec(function (err, results) {
       if (err) {
-        console.log('Error', err);
         return next(err);
       }
-      console.log('rows', results.length);
       for (let i = 0; i < results.length && counter < end; i++) {
         const row = results[i];
         if (counter >= start || row.twots.length + counter <= end) {
@@ -74,7 +72,6 @@ exports.getLastTwots = function (req, res, next) {
           }
           const begin = Math.max(start - counter, 0);
           const until = Math.min(end - counter, row.twots.length);
-          console.log('Counter', counter, 'Begin', begin, 'until', until);
           data.twots.push(...row.twots.slice(begin, until));
           counter += until;
         } else {
@@ -90,22 +87,41 @@ exports.getLastTwots = function (req, res, next) {
   }
 };
 
-exports.deleteTwot = function (req, res, next) {
+exports.deleteTwot = async (req, res, next) => {
   const user = req.user;
   const index = req.params.index;
-  if (user && user._id) {
-    Twot.findOne({ user: user._id }, (err, existingTwots) => {
+  if (user && user['_id']) {
+    await Twot.find({ user }).sort('-seqno' ).exec((err, results) => {
       if (err) {
         return next(err);
       }
-      if (existingTwots && existingTwots.twots.length >= index) {
-        existingTwots.twots.splice(index, 1);
-        existingTwots.save()
-          .then(() => res.json({ message: 'OK' }))
-          .catch(err2 => next(err2));
+      let counter = 0;
+      let deleted = false;
+      if (results) {
+        for (let i = 0; i < results.length && !deleted; i++) {
+          const row = results[i];
+          console.log('To delete', index, 'Row', i, 'Counter', counter);
+          if (index >= counter && index < row.twots.length + counter) {
+            console.log('Deleting', 'Row', i, 'item', (index - counter));
+            row.twots.splice(index - counter, 1);
+            deleted = true;
+            if (row.twots.length == 0) {
+              row.remove()
+                .then(data => res.json({ message: 'OK' }))
+                .catch(err1 => res.status(500).send({ error: err1 }));
+            } else {
+              row.save()
+                .then(data => res.json({ message: 'OK' }))
+                .catch(err1 => res.status(500).send({ error: err1 }));
+            }
+          }
+          counter += row.twots.length;
+        }
       } else {
-        res.status(404).send({ message: 'No twots' });
+        return res.status(404).send({ message: 'No twots' });
       }
     });
+  } else {
+    res.status(404).send({ message: 'No twots' });
   }
 };

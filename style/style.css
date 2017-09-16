@@ -59,7 +59,8 @@ input#twot {
 .settings {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
-}
+    padding-right: 2px;
+    padding-left: 2px;}
 .content {
     background-color: #eee;
     height: 100%;
@@ -117,4 +118,13 @@ input#twot {
 }
 .entry textarea {
     height: 58px;
+}
+.deleteTwot {
+    margin: 2px;
+    padding: 0px 3px;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    color: #bbb;
+    font-size: 0.6em;
+    cursor: pointer;
 }

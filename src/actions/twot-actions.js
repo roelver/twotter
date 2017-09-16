@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {
   CREATE_TWOT,
+  DELETE_TWOT,
   POPULATE_TWOTS,
   LS_TOKEN_KEY,
   API_ERROR
@@ -65,6 +66,20 @@ export function loadTwots(start) {
         });
       })
       .catch(err => console.error('Load data error (ignore on unit test)'));
+  };
+}
+
+export function deleteTwot(index) {
+  return function (dispatch) {
+    const options = getOptions();
+    axios.delete(`${ROOT_URL}/twot/${index}`, options)
+      .then(({data}) => {
+        dispatch({
+          type: DELETE_TWOT,
+          payload: index
+        });
+      })
+      .catch(err => console.error('Load data error (ignore on unit test)', err));
   };
 }
 
