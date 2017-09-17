@@ -32,7 +32,9 @@ exports.signup = function (req, res, next) {
         email: user.email,
         username: user.username,
         fullname: user.fullname,
-        avatarUrl: user.avatarUrl });
+        avatarUrl: user.avatarUrl,
+        joined: new Date()
+      });
     });
   });
 };

@@ -22,7 +22,7 @@ const store = createStoreWithMiddleware(reducers);
 const token = localStorage.getItem(LS_TOKEN_KEY);
 if (token) {
   store.dispatch(loadCurrentUser(token));
-  store.dispatch(loadTwots(0));
+  store.dispatch(loadTwots(1));
 }
 
 ReactDOM.render(

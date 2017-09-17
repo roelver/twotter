@@ -69,14 +69,14 @@ export function loadTwots(start) {
   };
 }
 
-export function deleteTwot(index) {
+export function deleteTwot(id) {
   return function (dispatch) {
     const options = getOptions();
-    axios.delete(`${ROOT_URL}/twot/${index}`, options)
+    axios.delete(`${ROOT_URL}/twot/${id}`, options)
       .then(({data}) => {
         dispatch({
           type: DELETE_TWOT,
-          payload: index
+          payload: id
         });
       })
       .catch(err => console.error('Load data error (ignore on unit test)', err));

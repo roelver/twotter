@@ -6,6 +6,11 @@ const config = require('../../server/config');
 describe('AuthController', () => {
   const url = `http://localhost:${process.env.PORT || 8080}`;
 
+  // wait 2 seconds to allow server to restart, before running test cases
+  before((done) => {
+    setTimeout(done, 1500);
+  });
+
   it('should reject to login with unknown user (make sure API server is running on 8080)', () => {
     const profile = {
       email: 'unknown@example.com',

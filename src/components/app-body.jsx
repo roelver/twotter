@@ -15,7 +15,7 @@ class AppBody extends Component {
 
   componentWillMount() {
     if (this.props.allTwots.length === 0) {
-      this.props.loadTwots(0);
+      this.props.loadTwots(1);
     }
   }
 
@@ -29,8 +29,8 @@ class AppBody extends Component {
     this.props.createTwot(newTwot);
   }
 
-  onDeleteTwot(idx) {
-    this.props.deleteTwot(idx);
+  onDeleteTwot(id) {
+    this.props.deleteTwot(id);
   }
 
   renderTwots() {
@@ -39,7 +39,6 @@ class AppBody extends Component {
         return <Twot
           key={twot.id}
           twot={twot}
-          idx={index}
           onDeleteTwot={this.onDeleteTwot.bind(this)}
           iconUrl={this.props.user.avatarUrl }/>;
       });

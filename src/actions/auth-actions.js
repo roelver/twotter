@@ -56,7 +56,7 @@ export function loadCurrentUser(token) {
       fetch(`${ROOT_URL}/me`, options)
         .then(resp => resp.json()
           .then(user => {
-            loadTwots();
+            loadTwots(1);
             return dispatch({
               type: STORE_CURRENT_USER,
               payload: user

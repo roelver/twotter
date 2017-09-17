@@ -9,7 +9,7 @@ const qImageUrl = '/assets/twitter-egg-icon.png';
 class Twot extends Component {
 
   onDeleteClick() {
-    this.props.onDeleteTwot(this.props.idx);
+    this.props.onDeleteTwot(this.props.twot.id);
   }
 
   render() {
@@ -40,7 +40,6 @@ class Twot extends Component {
 
 Twot.propTypes = {
   twot: PropTypes.shape(TwotType).isRequired,
-  idx: PropTypes.number.isRequired,
   onDeleteTwot: PropTypes.func.isRequired
 };
 

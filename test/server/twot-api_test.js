@@ -6,6 +6,11 @@ const config = require('../../server/config');
 describe('TwotController', () => {
   const url = `http://localhost:${process.env.PORT || 8080}`;
 
+  // wait 2 seconds to allow server to restart, before running test cases
+  before((done) => {
+    setTimeout(done, 1500);
+  });
+
   it('should fail if a user is not signed in', () => {
     request(url)
       .get('/twot')
@@ -54,15 +59,15 @@ describe('TwotController', () => {
       expect(resp.statusCode).to.equal(200); // OK
       expect(resp.body.twots).to.be.an('array');
       expect(resp.body.twots[0].text).to.equal('My latest twot');
+      const addedId = resp.body.twots[0]._id;
+      // next, remove immediately
+      if (addedId) {
+        const resp1 = await request(url)
+          .delete(`/twot/${addedId}`)
+          .set('Authorization', token);
+        expect(resp1.statusCode).to.equal(200); // OK
+        expect(resp1.body.message).to.equal('OK');
+      }
     });
-
-    it('should delete the latest twot', async () => {
-      const resp = await request(url)
-        .delete('/twot/0')
-        .set('Authorization', token);
-      expect(resp.statusCode).to.equal(200); // OK
-      expect(resp.body.message).to.equal('OK');
-    });
-
   });
 });

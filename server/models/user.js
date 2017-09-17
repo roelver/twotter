@@ -8,7 +8,8 @@ const userSchema = new Schema({
   username: String,
   fullname: String,
   avatarUrl: String,
-  password: String
+  password: String,
+  joined: Date
 });
 
 // encrypt password
