@@ -2,6 +2,7 @@ const passport = require('passport');
 
 const Authentication = require('./controllers/authentication');
 const TwotController = require('./controllers/twot');
+const HashtagController = require('./controllers/hashtag');
 const passportService = require('./services/passport');
 
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -22,5 +23,7 @@ module.exports = (app) => {
   app.get('/twot', requireAuth, TwotController.getLastTwots);
   app.post('/twot', requireAuth, TwotController.addTwot);
   app.delete('/twot/:id', requireAuth, TwotController.deleteTwot);
+
+  app.post('/hashtag', requireAuth, HashtagController.addHashtag);
 
 };

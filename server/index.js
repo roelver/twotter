@@ -11,6 +11,7 @@ const app = express();
 const router = require('./router');
 
 // DB setup
+mongoose.Promise = global.Promise;
 mongoose.connect(config.db.mongodb, {
   useMongoClient: true
 });

@@ -8,6 +8,6 @@ const twotSchema = new Schema({
   text: String
 });
 
-const ModelClass = mongoose.model('twot', twotSchema);
+const TwotClass = mongoose.model('twot', twotSchema);
 
-module.exports = ModelClass;
+module.exports = TwotClass;

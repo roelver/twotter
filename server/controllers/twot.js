@@ -1,6 +1,5 @@
 const Twot = require('../models/twot');
-const maxTwotsPerDoc = require('../config').maxTwotsPerDoc;
-
+const { processHashesOnAdd, processHashesOnDelate } = require('../services/hash-helper');
 
 exports.addTwot = function (req, res, next) {
   const user = req.user;
@@ -17,17 +16,21 @@ exports.addTwot = function (req, res, next) {
           fullname: user.fullname,
           avatarUrl: user.avatarUrl,
           twots: [
-            { _id: t._id,
+            {
+              _id: t._id,
               text: t.text,
               posted: t.posted
             }
           ]
         };
-        return res.json(reply);
-      })
-      .catch(err2 => next(err2));
+        processHashesOnAdd(t)
+          .then((tw) => {
+            return res.json(reply);
+          });
+      });
   }
 };
+
 
 exports.getLastTwots = function (req, res, next) {
   const user = req.user;
