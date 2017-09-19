@@ -17,7 +17,7 @@ export default function (state = INITIAL_STATE, action) {
       return { allTwots: action.payload.allTwots };
     case DELETE_TWOT:
       const index = state.allTwots.findIndex((twot) => {
-        return twot.id === action.payload;
+        return twot._id === action.payload;
       });
       return { ...state,
         allTwots: [

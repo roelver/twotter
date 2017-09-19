@@ -9,7 +9,7 @@ const qImageUrl = '/assets/twitter-egg-icon.png';
 class Twot extends Component {
 
   onDeleteClick() {
-    this.props.onDeleteTwot(this.props.twot.id);
+    this.props.onDeleteTwot(this.props.twot._id);
   }
 
   render() {
@@ -18,12 +18,12 @@ class Twot extends Component {
       <div className="twot row">
         <div className="bag">
           <div className="col-xs-2 icon">
-            <img src={this.props.iconUrl || qImageUrl} alt="icon" />
+            <img src={twot.user.avatarUrl || qImageUrl} alt="icon" />
           </div>
           <div className="col-xs-9 content">
             <div className="origin">
-              <div className="author">{ twot.authorName }</div>
-              <div className="date">{ twot.datePosted }</div>
+              <div className="author">{ twot.user.fullname }</div>
+              <div className="date">{ twot.posted }</div>
             </div>
             <div className="message">{ twot.text }
             </div>

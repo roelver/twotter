@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
+import User from './user';
 
 export default {
-  id: PropTypes.string.isRequired,
-  authorName: PropTypes.string.isRequired,
-  authorId: PropTypes.string.isRequired,
+  _id: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  datePosted: PropTypes.string.isRequired
+  posted: PropTypes.string.isRequired,
+  user: PropTypes.shape(User).isRequired
 };

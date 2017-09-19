@@ -22,19 +22,6 @@ function getOptions() {
   return options;
 }
 
-function mapServerDataToTwots(serverData) {
-  return serverData.twots.map((twot) => {
-    return {
-      id: twot['_id'],
-      authorId: serverData.userid,
-      authorName: serverData.fullname,
-      avatarUrl: serverData.avatarUrl,
-      text: twot.text,
-      datePosted: twot.posted
-    };
-  });
-}
-
 export function createTwot(newTwot) {
   return function (dispatch) {
     const options = getOptions();
@@ -42,7 +29,7 @@ export function createTwot(newTwot) {
       .then((resp) => {
         dispatch({
           type: CREATE_TWOT,
-          payload: mapServerDataToTwots(resp.data)[0]
+          payload: resp.data[0]
         });
       })
       .catch(err => {
@@ -59,10 +46,10 @@ export function loadTwots(start) {
   return function (dispatch) {
     const options = getOptions();
     axios.get(`${ROOT_URL}/twot/${start}`, options)
-      .then(({data}) => {
+      .then(({ data }) => {
         dispatch({
           type: POPULATE_TWOTS,
-          payload: { allTwots: mapServerDataToTwots(data) }
+          payload: { allTwots: data }
         });
       })
       .catch(err => console.error('Load data error (ignore on unit test)'));

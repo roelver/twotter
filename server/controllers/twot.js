@@ -11,50 +11,20 @@ exports.addTwot = function (req, res, next) {
     twot.posted = new Date();
     twot.save()
       .then((t) => {
-        const reply = {
-          userid: user._id,
-          fullname: user.fullname,
-          avatarUrl: user.avatarUrl,
-          twots: [
-            {
-              _id: t._id,
-              text: t.text,
-              posted: t.posted
-            }
-          ]
-        };
+        const reply = [{
+          _id: t._id,
+          text: t.text,
+          posted: t.posted,
+          user: {
+            _id: user._id,
+            fullname: user.fullname,
+            avatarUrl: user.avatarUrl
+          }
+        }];
         processHashesOnAdd(t)
           .then((tw) => {
             return res.json(reply);
           });
-      });
-  }
-};
-
-
-exports.getLastTwots = function (req, res, next) {
-  const user = req.user;
-  const start = req.params.start || 1;
-  if (user && user._id) {
-    const data = {
-      userid: user._id,
-      fullname: user.fullname,
-      avatarUrl: user.avatarUrl,
-      twots: []
-    };
-    Twot.find({ user })
-      .sort('-posted')
-      .skip(start - 1)
-      .limit(10)
-      .exec((err, results) => {
-        if (err) {
-          return next(err);
-        }
-        data.twots.push(...results);
-        if (data.twots.length === 0) {
-          return res.status(404).send({ message: 'No more twots' });
-        }
-        return res.json(data);
       });
   }
 };

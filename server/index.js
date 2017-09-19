@@ -8,13 +8,14 @@ const mongoose = require('mongoose');
 const config = require('./config');
 
 const app = express();
-const router = require('./router');
 
 // DB setup
 mongoose.Promise = global.Promise;
 mongoose.connect(config.db.mongodb, {
   useMongoClient: true
 });
+
+const router = require('./router');
 
 // App setup (express)
 //  -- register middleware

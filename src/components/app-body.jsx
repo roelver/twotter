@@ -11,6 +11,7 @@ class AppBody extends Component {
   constructor(props) {
     super(props);
     this.addTwot = this.addTwot.bind(this);
+    this.onDeleteTwot = this.onDeleteTwot.bind(this);
   }
 
   componentWillMount() {
@@ -19,28 +20,28 @@ class AppBody extends Component {
     }
   }
 
-  addTwot(text) {
-    const newTwot = {
-      id: 'TBD by server',
-      authorName: this.props.user.fullname,
-      authorId: this.props.user.email,
-      text
-    };
-    this.props.createTwot(newTwot);
-  }
-
   onDeleteTwot(id) {
     this.props.deleteTwot(id);
+  }
+
+  addTwot(text) {
+    const newTwot = {
+      text
+    };
+    console.log();
+    this.props.createTwot(newTwot);
   }
 
   renderTwots() {
     if (this.props.allTwots && this.props.allTwots.length > 0) {
       return this.props.allTwots.map((twot, index) => {
-        return <Twot
-          key={twot.id}
-          twot={twot}
-          onDeleteTwot={this.onDeleteTwot.bind(this)}
-          iconUrl={this.props.user.avatarUrl }/>;
+        return (
+          <Twot
+            key={twot._id}
+            twot={twot}
+            onDeleteTwot={this.onDeleteTwot}
+          />
+        );
       });
     }
     return null;

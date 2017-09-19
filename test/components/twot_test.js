@@ -1,17 +1,21 @@
-import { renderComponent , expect } from '../test_helper';
+import { renderComponent, expect } from '../test_helper';
 import Twot from '../../src/components/twot';
 
-describe('Twot' , () => {
+describe('Twot', () => {
   let component;
 
   beforeEach(() => {
     const props = { twot: {
-      id: '1',
-      authorId: 'Tester',
-      authorName: 'Tester',
+      _id: '1',
       text: 'Hello World!',
-      datePosted: 'Today'
-    }};
+      posted: 'Today',
+      user: {
+        _id: '2838234892',
+        fullname: 'Tester',
+        avatarUrl: 'dummy.png'
+      }
+    }
+    };
     component = renderComponent(Twot, props);
   });
 
@@ -30,5 +34,4 @@ describe('Twot' , () => {
   it('text is filled correctly', () => {
     expect(component.find('.message')).to.contain('Hello World!');
   });
-
 });
