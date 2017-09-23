@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { createBrowserHistory } from 'history';
+
 import { SIGNIN_URL } from '../../constants';
 
 export default function(ComposedComponent) {
@@ -11,7 +13,8 @@ export default function(ComposedComponent) {
 
     componentWillMount() {
       if (!this.props.authenticated) {
-        this.context.router.history.push(SIGNIN_URL);
+        const history = createBrowserHistory();
+        this.context.router.history.push(`${SIGNIN_URL}?${history.location.pathname}`);
       }
     }
 

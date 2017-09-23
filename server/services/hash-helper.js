@@ -41,10 +41,10 @@ async function getHashtag(hash) {
 
 function collectHashtags(text) {
   const result = [];
-  const filter = /(?:#)([a-zA-Z0-9]*)(?:\s|$)/g;
+  const filter = /(#)([a-zA-Z0-9]*)([^a-zA-Z0-9]|$)/g;
   let match = filter.exec(text);
   while (match != null) {
-    result.push(match[1]);
+    result.push(match[2]);
     match = filter.exec(text);
   }
   return result;

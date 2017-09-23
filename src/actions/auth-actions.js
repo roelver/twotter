@@ -56,7 +56,6 @@ export function loadCurrentUser(token) {
       fetch(`${ROOT_URL}/me`, options)
         .then(resp => resp.json()
           .then(user => {
-            loadTwots(1);
             return dispatch({
               type: STORE_CURRENT_USER,
               payload: user
@@ -66,10 +65,6 @@ export function loadCurrentUser(token) {
         .catch((err) => {
           loginError(err);
         });
-      dispatch({
-        type: STORE_TOKEN,
-        payload: token
-      });
     }
   };
 }
@@ -78,7 +73,6 @@ export function loadCurrentUser(token) {
 export function signIn({ email, password }) {
   return function (dispatch) {
     localStorage.removeItem(LS_TOKEN_KEY);
-    const history = createBrowserHistory();
     const options = {
       method: 'POST',
       headers: new Headers({
@@ -92,9 +86,7 @@ export function signIn({ email, password }) {
         if (resp.status > 399) {
           throw new Error('Invalid credentials');
         }
-
         processToken(resp, dispatch, 'Login');
-        history.push('/timeline');
       })
       .catch((err) => {
         dispatch(loginError(`Login failed (${err.message})`));

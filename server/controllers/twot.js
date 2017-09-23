@@ -1,5 +1,5 @@
 const Twot = require('../models/twot');
-const { processHashesOnAdd, processHashesOnDelate } = require('../services/hash-helper');
+const { processHashesOnAdd, processHashesOnDelete } = require('../services/hash-helper');
 
 exports.addTwot = function (req, res, next) {
   const user = req.user;
@@ -38,6 +38,7 @@ exports.deleteTwot = async (req, res, next) => {
         return next(err);
       }
       if (result) {
+        processHashesOnDelete(result);
         result.remove()
           .then(data => res.json({ message: 'OK' }))
           .catch(err1 => res.status(500).send({ error: err1 }));

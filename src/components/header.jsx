@@ -1,21 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { SIGNIN_URL } from '../constants';
-
-const propTypes = {
-  user: PropTypes.object,
-  loggedIn: PropTypes.bool
-};
-
-const defaultProps = {
-  user: {},
-  loggedIn: false
-};
-
 
 class Header extends Component {
   renderLinksLeft() {
@@ -94,9 +82,6 @@ class Header extends Component {
     );
   }
 }
-
-Header.propTypes = propTypes;
-Header.defaultProps = defaultProps;
 
 const mapStateToProps = (state) => {
   return {

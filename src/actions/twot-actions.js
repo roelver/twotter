@@ -4,7 +4,8 @@ import {
   DELETE_TWOT,
   POPULATE_TWOTS,
   LS_TOKEN_KEY,
-  API_ERROR
+  API_ERROR,
+  REMOVE_ALERT
 } from '../constants';
 
 import config from '../config';
@@ -42,17 +43,27 @@ export function createTwot(newTwot) {
   };
 }
 
-export function loadTwots(start) {
+export function loadTwots(start, hashtag) {
+  let hashtagPath = '';
+  if (hashtag) {
+    hashtagPath = `h/${hashtag}/`;
+  }
   return function (dispatch) {
     const options = getOptions();
-    axios.get(`${ROOT_URL}/twot/${start}`, options)
+    axios.get(`${ROOT_URL}/twot/${hashtagPath}${start}`, options)
       .then(({ data }) => {
         dispatch({
           type: POPULATE_TWOTS,
-          payload: { allTwots: data }
+          payload: { allTwots: data, error: '' }
         });
       })
-      .catch(err => console.error('Load data error (ignore on unit test)'));
+      .catch(err => {
+        dispatch({
+          type: POPULATE_TWOTS,
+          payload: { error: 'No twots are available' }
+        });
+        console.error('Load data error (ignore on unit test)');
+      });
   };
 }
 
@@ -70,3 +81,8 @@ export function deleteTwot(id) {
   };
 }
 
+export function removeAlert() {
+  return {
+    type: REMOVE_ALERT
+  };
+}

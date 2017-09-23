@@ -11,7 +11,7 @@ const getTwotById = function (twotId) {
       })
       .exec((err, twot) => {
         if (err) {
-          reject(err);
+          resolve(err);
         }
         resolve(twot);
       });
@@ -61,11 +61,15 @@ exports.getTwotsByHashtag = function (req, res, next) {
           })
         ).then((twots) => {
           if (twots.length > 0) {
-            return res.json(twots.sort((a,b) => (a.posted > b.posted ? -1 : 1)));
+            return res.json(twots
+              .filter(twot => twot !== null)
+              .sort((a,b) => (a.posted > b.posted ? -1 : 1)));
           }
           return res.status(404).send({ message: 'No more twots' });
         })
           .catch(errx => res.status(200).send({ message: errx }));
+      } else {
+        return res.status(404).send({ message: 'No more twots' });
       }
     });
 };

@@ -128,3 +128,29 @@ input#twot {
     font-size: 0.6em;
     cursor: pointer;
 }
+
+.alert {
+    font-size: 14px;
+}
+
+.twotlist-enter {
+    opacity: 0.01;
+    max-height: 0;
+}
+
+.twotlist-enter.twotlist-enter-active {
+    opacity: 1;
+    transition: opacity 400ms ease-out;
+    max-height: 40px;
+}
+
+.twotlist-leave {
+    opacity: 1;
+    max-height: 40px;
+}
+
+.twotlist-leave.twotlist-leave-active {
+    opacity: 0.01;
+    transition: opacity 400ms ease-out;
+    max-height: 0;
+}
