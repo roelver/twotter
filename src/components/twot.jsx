@@ -33,10 +33,10 @@ class Twot extends Component {
     return (
       <div className="twot row">
         <div className="bag">
-          <div className="col-xs-2 icon">
+          <div className="icon">
             <img src={twot.user.avatarUrl || qImageUrl} alt="icon" />
           </div>
-          <div className="col-xs-9 content">
+          <div className="content">
             <div className="origin">
               <div className="author">{ twot.user.fullname }</div>
               <div className="date">{ twot.posted }</div>
@@ -44,7 +44,7 @@ class Twot extends Component {
             <div className="message">{ this.renderTwotText(twot.text) }
             </div>
           </div>
-          <div className="col-xs-1 settings">
+          <div className="settings">
             <div
               className="pull-right deleteTwot"
               onClick={event => this.onDeleteClick(event)}

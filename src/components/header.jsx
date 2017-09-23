@@ -71,7 +71,9 @@ class Header extends Component {
       <nav className="navbar navbar-light">
         <div className="container-fluid">
           <div className="navbar-header">
-            <Link to="/" className="navbar-brand">TWOTTER</Link>
+            <Link to="/" className="navbar-brand">
+              <img className="logo" alt="Twotter Logo" src="/assets/twotter.png" /> TWOTTER
+            </Link>
           </div>
           <div id="navbar">
             { this.renderLinksLeft() }

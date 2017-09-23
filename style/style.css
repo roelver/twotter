@@ -3,6 +3,7 @@ header {
     color: white;
     padding: 20px;
     text-align: center;
+    font-family: 'Titillium Web', sans-serif;
 }
 
 .parent {
@@ -13,12 +14,12 @@ header {
 }
 .body-wrapper {
     background-color: #fff;
-    font-size: 1.4em;
 }
 .app-body, app-left-bar, app-right-bar {
     display: flex;
     padding-left: 0;
     padding-right: 0;
+    font-family: 'Titillium Web', sans-serif;
 }
 .entry {
     padding: 20px;
@@ -56,14 +57,24 @@ input#twot {
     border-bottom-left-radius: 8px;
     padding: 0;
 }
+.icon {
+    width: 80px;
+    float: left;
+}
 .settings {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     padding-right: 2px;
-    padding-left: 2px;}
+    padding-left: 2px;
+    float: right;
+    width: 50px;
+}
 .content {
     background-color: #eee;
     height: 100%;
+    width: calc(100% - 80px - 50px);
+    display: inline-block;
+    padding: 0 8px;
 }
 .bag {
     border-color: #090;
@@ -73,8 +84,8 @@ input#twot {
     height: 80px;
     margin-top: 5px;
     margin-bottom: 5px;
-    font-size: 0.7em;
     color: #555;
+    width: 100%;
 }
 .origin, .message {
     width: 100%;
@@ -94,7 +105,6 @@ input#twot {
 }
 .message {
     height: 55px;
-    font-size: 0.9em;
     overflow: hidden;
     padding: 0;
 }
@@ -153,4 +163,16 @@ input#twot {
     opacity: 0.01;
     transition: opacity 400ms ease-out;
     max-height: 0;
+}
+
+img.logo {
+    height: 28px;
+}
+.navbar-brand {
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 28px;
+}
+.navbar-brand>img {
+    display: inline;
 }
